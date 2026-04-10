@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { ServiceBusModule } from './service-bus/service-bus.module';
 import { LeadRegistrationModule } from './lead-registration/lead-registration.module';
 import { LeadScoreModule } from './lead-score/lead-score.module';
+import { OauthModule } from './oauth/oauth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { LeadScoreModule } from './lead-score/lead-score.module';
     ServiceBusModule,
     LeadRegistrationModule,
     LeadScoreModule,
+    OauthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

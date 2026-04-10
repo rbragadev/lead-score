@@ -29,6 +29,8 @@ import { LeadscoreTierRule } from './leadscore/leadscore-tier-rule.entity';
 import { Invite } from './system/invite.entity';
 import { PasswordReset } from './system/password-reset.entity';
 import { User } from './system/user.entity';
+import { OAuthConnection } from './integrations/oauth-connection.entity';
+import { OAuthState } from './integrations/oauth-state.entity';
 
 export const ENTITIES = [
   Person,
@@ -64,6 +66,9 @@ export const ENTITIES = [
   AdAccount,
   Campaign,
   CampaignDailyPerformance,
+
+  OAuthConnection,
+  OAuthState,
 
   User,
   PasswordReset,

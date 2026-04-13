@@ -31,6 +31,10 @@ import { PasswordReset } from './system/password-reset.entity';
 import { User } from './system/user.entity';
 import { OAuthConnection } from './integrations/oauth-connection.entity';
 import { OAuthState } from './integrations/oauth-state.entity';
+import { MarketingConnectionAccount } from './marketing-sync/marketing-connection-account.entity';
+import { MarketingExtractJob } from './marketing-sync/marketing-extract-job.entity';
+import { MarketingExtractRaw } from './marketing-sync/marketing-extract-raw.entity';
+import { MarketingCampaignDailyPerformance } from './marketing-sync/marketing-campaign-daily-performance.entity';
 
 export const ENTITIES = [
   Person,
@@ -69,6 +73,10 @@ export const ENTITIES = [
 
   OAuthConnection,
   OAuthState,
+  MarketingConnectionAccount,
+  MarketingExtractJob,
+  MarketingExtractRaw,
+  MarketingCampaignDailyPerformance,
 
   User,
   PasswordReset,

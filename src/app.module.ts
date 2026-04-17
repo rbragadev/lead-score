@@ -7,6 +7,7 @@ import { ServiceBusModule } from './service-bus/service-bus.module';
 import { LeadRegistrationModule } from './lead-registration/lead-registration.module';
 import { LeadScoreModule } from './lead-score/lead-score.module';
 import { OauthModule } from './oauth/oauth.module';
+import { MarketingDashboardModule } from './marketing-dashboard/marketing-dashboard.module';
 import { MarketingSyncModule } from './marketing-sync/marketing-sync.module';
 
 @Module({
@@ -22,6 +23,7 @@ import { MarketingSyncModule } from './marketing-sync/marketing-sync.module';
     LeadScoreModule,
     OauthModule,
     MarketingSyncModule,
+    MarketingDashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -106,6 +106,19 @@ export class LeadPersistenceService {
     return undefined;
   }
 
+  private extractExternalAdId(
+    payload: Record<string, unknown>,
+  ): string | undefined {
+    const utms =
+      payload.utms && typeof payload.utms === 'object' && !Array.isArray(payload.utms)
+        ? (payload.utms as Record<string, unknown>)
+        : undefined;
+
+    if (!utms) return undefined;
+
+    return this.pickNonEmptyTrimmedString(utms, 'h_ad_id');
+  }
+
   private pickTemperatureAbbreviation(
     payload: Record<string, unknown>,
   ): string | undefined {
@@ -365,6 +378,7 @@ export class LeadPersistenceService {
           const incomingUtmSource = this.pickString(payloadObj, 'utm_source');
           const normalizedUtmSource =
             this.normalizeUtmSource(incomingUtmSource);
+          const externalAdId = this.extractExternalAdId(payloadObj);
 
           existing.page = this.pickString(payloadObj, 'page') ?? existing.page;
           existing.path = this.pickString(payloadObj, 'path') ?? existing.path;
@@ -380,6 +394,7 @@ export class LeadPersistenceService {
             this.extractAdIdFromUtmContent(
               this.pickString(payloadObj, 'utm_content'),
             ) ?? existing.ad_id;
+          existing.external_ad_id = externalAdId ?? existing.external_ad_id;
           existing.utm_term =
             this.pickString(payloadObj, 'utm_term') ?? existing.utm_term;
           existing.utm_id =
@@ -454,6 +469,7 @@ export class LeadPersistenceService {
       // 1) cria CAPTURE primeiro
       const utmsJsonb = this.buildUtmsJsonb(payloadObj);
       const utmContent = this.pickString(payloadObj, 'utm_content');
+      const externalAdId = this.extractExternalAdId(payloadObj);
       const capture = captureRepository.create({
         occurred_at: new Date(),
         page: this.pickString(payloadObj, 'page'),
@@ -463,6 +479,7 @@ export class LeadPersistenceService {
         utm_campaign: this.pickString(payloadObj, 'utm_campaign'),
         utm_content: utmContent,
         ad_id: this.extractAdIdFromUtmContent(utmContent),
+        external_ad_id: externalAdId,
         utm_term: this.pickString(payloadObj, 'utm_term'),
         utm_id: this.pickString(payloadObj, 'utm_id'),
         tag_id: tagId,
